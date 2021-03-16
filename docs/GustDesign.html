@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>DVM</title>
+		<title>GustDesign</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -37,20 +37,29 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>Discrete vortex model</h1>
-									<p>This code is developed to simulated wings undergoing unsteady pitch maneuvers during transverse gust-encounters.</p>
+									<h1>Gust generator design</h1>
+									<p>An experimental apparatus design to generate a tranverse gust in a water-tow tank facility</p>
 								</header>
 
+				        <h2>Introduction</h2>
+									<p>unsteady gusty conditions lead to flight instability and structural problems. Thus, mitigation of unsteady wing-gust encounters is one of the main current areas of research in the field of aerodynamics. The simulation of a gust is necessary to experimentally investigate unsteady wing-gust encounter. In this project, I designed and built a gust generator for the UMD water-tow tank facility. The gust generator is analogous to an open-test section water tunnel. Water flow is driven using a centrifugal pump and is guided to the gust outlet. The water exiting the outlet forms the gust region the wing encounters as it is being towed. </p>
 
-								<p><span class="image right"><img src="images/DVMSnap.PNG" alt="" /></span>Discrete vortex models are computationally low cost tools that rely on potential flow modeling to study the aerodynamics of wings. The steady panel method that have been historically used in aircraft design is a class of these methods. Unsteady discrete vortex models can be used to study flow physics of wings undergoing unsteady kinematic maneuvers or unsteady flow conditions. In this work, I developed an unsteady discrete vortex model to study the aerodynamics of wing-gust encounters and the effect of wing pitching on gust mitigation.</p>
-								<p>The video below shows a wing encountering a sine-squared gust. The top left case shows the wing encountering the gust without any control manuever. The rest of the cases show the wing encountering the gust with three different pitch maneuvers that aim to mitigate the tranient lift that results from the encounter.   </p>
-								<center><iframe width="560" height="315" src="https://www.youtube.com/embed/ieyC5VykPcw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </center>
-								<h2>Papers:</h2>
-                <p>Sedky, G., Lagor, F. D., & Jones, A. (2020). Unsteady aerodynamics of lift regulation during a transverse gust encounter. Physical Review Fluids, 5(7), 074701.</p>
-								<p>Sedky, G., Lagor, F., & Jones, A. R. (2020). The unsteady aerodynamics of a transverse wing-gust encounter with closed-loop pitch control. In AIAA Scitech 2020 Forum (p. 1056).</p>
 
-								<hr />
+							  <h2>Design</h2>
+								<a class="image fit"><img src="images/GustRedesign/AnnotatedAssembly.PNG" alt="" /></a>
+                <p>The water exits the pump's discharge side and is guided to the diffuser section by PVC piping. The diffuser sections expand the flow gradually to avoid the onset of flow separation and the formation of recirculation zones. The fours diffusers merge into the mixing chamber that creates some travel distance for the flow to undergo before further treatment. This gives enough time for the flows to merge. The flow then turns 90 degrees via the aid of turning vanes into the gust outlet. The flow passes through a section of 1/8" honeycomb flow straightener on its way out of the system to remove flow tilt as well as break down large turbulent structures. </p>
+
+								<p><span class="image left"><img src="images/GustRedesign/Adapter.PNG" alt="" /></span>The Diffuser-pipe adapter is a section that provides the flow a smooth transition from a circular pipe cross-section to a rectangular diffuser cross-section.</p>
+								<br>
+								<br>
+								<br>
+
+								<p><span class="image right"><img src="images/GustRedesign/Diffuser.PNG" alt="" /></span>The </p>
+
+								<br>
+								<br>
+
+
 
 
 							</section>
