@@ -59,7 +59,7 @@
 
 							</section>
               <section>
-              <h3>Statistical gaussian Bayesean estimation</h3>
+              <h3>Statistical gaussian Bayesean estimation (Bayes)</h3>
               <p>In this method, each pixel had a grayscale value ranging from 0 (black) to 255 (white). The pixel values of a picture is columnated to create a vector \(\boldsymbol{x}\) that contains 784 elements. It is assumed that the conditional probability density function of a vector given a certain class (clothing item) \(\omega_i\), \(P(\boldsymbol{x}|\omega_i)\) follows a gaussian distribution with with a mean \(\boldsymbol{\mu}\) and a variance \(\Sigma\). In addition,
 								the prior class probability \(P(\omega_i)\) of all the classes were assumed to be equal during training and testing. This means that before seeing the picture, the probability that the picture belongs to a certain class of clothing items is the same for all clothing items. Under this assumption, the Bayesian estimation rule reduces to assigning a state vector (picture) to the class (clothing item)
 								that maximizes the conditional probability
@@ -78,7 +78,7 @@
 							</section>
 
 							<section>
-								<h3>Nearest Neighborhood classifier</h3>
+								<h3>Nearest Neighborhood classifier (NN)</h3>
 								<p>In this method, the image state vectors are live in \(\mathbb{R}^{784}\). In this space, each image in the training set has a state vector that constitutes a prototype. To classify an image in the testing set, the euclidiean distance between the testing image and all the training images is found.
 									$$d(\boldsymbol{x}_\text{test},\boldsymbol{x}_\text{train})=\sqrt{(x_{1,\text{test}}-x_{1,\text{test}})^2 + (x_{2,\text{test}}-x_{2,\text{test}})^2 + .... + (x_{784,\text{test}}-x_{784,\text{test}})^2}$$
 									Then, the testing image is assigned to the class of the training image that is closest to it. <b>The classification error on the testing set came to about 15 %.</b>
@@ -98,16 +98,72 @@
 							   <center><img src="images/ML/ML_PCA.png" alt="" /></center>
 							   <center><figcaption>Nearest Neighborhood classier</figcaption><center>
 							 </figure>
-
+						 	</p>
 							 <h4>LDA</h4>
-							 Linear discriminant analysis was used to reduce the image state vectors from \(\mathbb{R}^{784}\) to \(\mathbb{R}^{M-1}\) where \(M=10\) is the number of classes. The built-in MATLAB function was used for this purpose. Again, the low-order state vectors were then fed into the Bayesian and Nearest Neighborhood classifier. <b>The minimum classification error came to about 25.4% in the case of the Bayesian classifier and 28% in the case of the Nearest Neighborhood classier.</b>
+							 <p>Linear discriminant analysis was used to reduce the image state vectors from \(\mathbb{R}^{784}\) to \(\mathbb{R}^{M-1}\) where \(M=10\) is the number of classes. The built-in MATLAB function was used for this purpose. Again, the low-order state vectors were then fed into the Bayesian and Nearest Neighborhood classifier. <b>The minimum classification error came to about 25.4% in the case of the Bayesian classifier and 28% in the case of the Nearest Neighborhood classier.</b></p>
 
 
             <section>
+            <h3>Support Vector Machine (SVM)</h3>
+            <p>SVMs are supervised learning models that strikes a good balance between accuracy achieved on a particular training set and the ability of the machine to generalize its training on new unforseen data. The learning technique achieves this objective by finding the optimal boundaries in n-space between classes that maximizes the margins between data points of different classes. In its simplest form, its a linear binry classfier, but it can be extended to non-linear classification via Kernels, as well as extended to include more than two classes.</p>
+
+						<p>In this method, I train a support vector machine (SVM) on the training FMNIST data and deploy the trained algorithm
+							on the test data. The <a href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM</a> library was used. The dimension of
+							the image vectors are reduced from 784 elements to 50 elements using principal component
+							analysis before the training procedure. I implement three different Kernels, including a linear kernel,
+							a third degree polynomial kernel, and a radial basis function kernel (RBF). The following figure shows a
+							comparison of the accuracy of the SVM algorithm in classifying the test data with each kernel.
+							All of the algorithms do relatively well. The SVM algorithm trained using the RBF kernel is the
+							most accurate classifier.</p>
+							<figure>
+								<center><img src="images/ML/SVM_Accuracy.png" alt="" /></center>
+								<center><figcaption>SVM Accuracy for different Kernels</figcaption><center>
+							</figure>
+
+						</section>
+						<section>
+						<h3>Convolutional Neural Network (CNN)</h3>
+						<p>In this section, I utilize a CNN to classify the test images. No PCA is performed on the data set
+							that is used here. The network used is a variant on <a href="https://en.wikipedia.org/wiki/LeNet#:~:text=LeNet%20is%20a%20convolutional%20neural,a%20simple%20convolutional%20neural%20network.">LeNet</a> that is shown in the following figure. It consists of
+							7 layers and an alternating convolution and max pooling application from one layer to the next.
+							ReLU is introduced in thefinal transition layer. <a href="https://www.vlfeat.org/matconvnet/">MatCovNet</a> toolbox was utilized to develop, train,
+							and implement this neural network.</p>
+
+							<figure>
+								<center><img src="images/ML/NN.png" width="900" height="375" /></center>
+								<center><figcaption>Convolutional neural network layout</figcaption><center>
+							</figure>
+
+						<p>The data is divided into batches of 100 images, and the network goes through the entire data
+							set 15 times (15 epochs) during the gradient descent procedure to tune all the weights. The following
+							shows the rate of descent of error as a function of the epoch number. The error rate has a steep
+							drop during the first couple of passes through the data, and then its continues decreasing with
+							a steadier pace. <b>The trained CNN is able to classify the test images with 90.6% accuracy which
+							is a higher accuracy compared to SVM.</b> This improvement in accuracy can be attributed to the
+							increased complexity of the classifier, large number of empirical weights that can be tuned in
+							training, and non-linearity introduced by the ReLU operator.</p>
+
+							<figure>
+								<center><img src="images/ML/Error.png" width="860" height="566" /></center>
+								<center><figcaption>Error rate per epoch</figcaption><center>
+							</figure>
 
 						</section>
 
-						</p>
+           <section>
+           <h3>Summary of results</h3>
+					 <figure>
+						 <p>The following table shows the classification error of the different methods utilized in this project. CNN proves to be the
+							 best classifier. This can be attributed to the increased complexity of the classifier, large number
+							 of empirical weights that can be tuned in training, and non-linearity introduced by the ReLU
+							 operator.</p>
+					 	<center><img src="images/ML/TableSummary.png" /></center>
+					 	<center><figcaption>The classification error on testing data set</figcaption><center>
+					 </figure>
+
+					 </section>
+
+
 					</div>
 
 					<!-- Footer -->
